@@ -1,0 +1,32 @@
+{
+    "name": "uncoupled",
+    "version": "0.0.1",
+    "private": true,
+    "description": "Minimalist, express-based web framework with dependency injection.",
+    "main": "main.js",
+    "scripts": {
+        "test": "mocha \"./tests/**/*.test.js\" --grep @integration --invert",
+        "integration": "mocha \"./tests/**/*.test.js\" --grep @integration || true",
+        "start": "node examples/app/server.js"
+    },
+    "engines": {
+        "node": ">=7.6.0"
+    },
+    "keywords": [
+        "web",
+        "api",
+        "express",
+        "controller",
+        "injection",
+        "di",
+        "asp.net"
+    ],
+    "author": "Milos Mrdovic <shellexecute@gmail.com>",
+    "license": "MIT",
+    "devDependencies": {
+        "mocha": "^5.2.0"
+    },
+    "dependencies": {
+        "express": "^4.16.4"
+    }
+}
