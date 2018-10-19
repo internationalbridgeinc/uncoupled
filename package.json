@@ -23,7 +23,7 @@
     ],
     "author": "Milos Mrdovic <shellexecute@gmail.com>",
     "license": "MIT",
-    "repository": "4n41yz3r/uncoupled",
+    "repository": "harrywhitehouse/uncoupled",
     "devDependencies": {
         "mocha": "^5.2.0"
     },
