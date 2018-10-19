@@ -13,16 +13,17 @@
         "node": ">=7.6.0"
     },
     "keywords": [
-        "web",
         "api",
+        "mvc",
+        "web api",
         "express",
         "controller",
         "injection",
-        "di",
-        "asp.net"
+        "di"
     ],
     "author": "Milos Mrdovic <shellexecute@gmail.com>",
     "license": "MIT",
+    "repository": "4n41yz3r/uncoupled",
     "devDependencies": {
         "mocha": "^5.2.0"
     },
