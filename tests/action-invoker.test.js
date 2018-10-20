@@ -3,7 +3,7 @@
 const assert = require('assert');
 const ResponseMock = require('./common/response-mock');
 const ActionInvoker = require('../src/action-invoker');
-const Controller = require('../src/api-controller').default;
+const Controller = require('../src/controller').default;
 
 class ControllerMock extends Controller {
     constructor() {

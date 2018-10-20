@@ -19,11 +19,12 @@ class ActionInvoker {
 
     async _tryInvokeAction(controllerName, actionName, req, res, next) {
         try {
-            await this._invokeAction(
+            let result = await this._invokeAction(
                 controllerName, actionName, req, res);
+            
+            res.send(result);
         }
-        catch (err)
-        {
+        catch (err) {
             this.handleError(err, req, res);
         }
     }
@@ -32,12 +33,10 @@ class ActionInvoker {
         let controller =
             this._createController(controllerName, req, res);
 
-        let controllerAction =
-            ActionInvoker._getControllerAction(controller, actionName);
+        let action =
+            this._getControllerAction(controller, actionName);
 
-        let result = await controllerAction.call(controller, req.params, req.body, req.query);
-        
-        res.send(result);
+        return await action.call(controller, req.params, req.body, req.query);
     }
 
     _createController(controllerName, req, res) {
@@ -46,7 +45,7 @@ class ActionInvoker {
         return controller;
     }
 
-    static _getControllerAction(controller, actionName) {
+    _getControllerAction(controller, actionName) {
         let controllerAction = controller[actionName];
         if (typeof(controllerAction) != 'function') {
             throw Error(`Unknown controller action '${ controller.constructor.name }.${ actionName }'.`);

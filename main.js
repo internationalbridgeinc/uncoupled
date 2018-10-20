@@ -1,7 +1,7 @@
 'use strict';
 
 const Route = require('./src/route');
-const Controller = require('./src/api-controller');
+const Controller = require('./src/controller');
 const Container = require('./src/di-container');
 
 module.exports = function (app, settings) {

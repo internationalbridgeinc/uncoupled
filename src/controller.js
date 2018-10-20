@@ -1,6 +1,6 @@
 'use strict';
 
-class ApiController {
+class Controller {
     constructor() {
     }
 
@@ -10,7 +10,7 @@ class ApiController {
     }
 }
 
-class LoggingApiController extends ApiController {
+class LoggingController extends Controller {
     initialize(req, res) {
         super.initialize(req, res);
 
@@ -28,6 +28,6 @@ function isProduction() {
     return process.env.NODE_ENV === 'production';
 }
 
-module.exports = isProduction() ? ApiController : LoggingApiController;
-module.exports.default = ApiController;
-module.exports.logging = LoggingApiController;
+module.exports = isProduction() ? Controller : LoggingController;
+module.exports.default = Controller;
+module.exports.logging = LoggingController;
