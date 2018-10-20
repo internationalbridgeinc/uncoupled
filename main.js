@@ -3,14 +3,9 @@
 const Route = require('./src/route');
 const Controller = require('./src/controller');
 const Container = require('./src/di-container');
+const initializer = require('./src/initializer');
 
-module.exports = function (app, settings) {
-    const container = new Container(settings.dependencies);
-    const route = new Route(app, container);
-    for (let line of settings.routes) {
-        route[line[0]].apply(route, line.splice(1));
-    }
-};
+module.exports = initializer;
 module.exports.route = Route;
 module.exports.controller = Controller;
 module.exports.container = Container;
