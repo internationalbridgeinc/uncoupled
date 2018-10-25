@@ -10,7 +10,7 @@ class Container {
     _getConfig(name) {
         let config = this.settings[name];
         if (!config) {
-            throw new Error('Unable to resolve unregistered service.');
+            throw new Error(`Unable to resolve '${ name }'.`);
         }
         return config;
     }
