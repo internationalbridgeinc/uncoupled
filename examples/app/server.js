@@ -8,4 +8,7 @@ app.use(express.json());
 
 initialize(app);
 
-app.listen(9095);
+const port = 9095;
+app.listen(port, () => {
+    console.log(`Server listening on ${ port }...`);
+});

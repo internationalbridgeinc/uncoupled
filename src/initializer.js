@@ -1,7 +1,7 @@
 'use strict';
 
-const Route = require('./src/route');
-const Container = require('./src/di-container');
+const Route = require('./route');
+const Container = require('./di-container');
 
 function initializer(app, settings) {
     const container = new Container(settings.dependencies);
