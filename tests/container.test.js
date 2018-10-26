@@ -35,7 +35,7 @@ describe('Container', () => {
                 container.resolve('invalid');
             }
             catch (err) {
-                assert.strictEqual('Unable to resolve unregistered service.', err.message);
+                assert.strictEqual('Unable to resolve \'invalid\'.', err.message);
                 return;
             }
             assert.fail();
@@ -44,7 +44,7 @@ describe('Container', () => {
         describe('for registered value', () => {
             let container = new Container({
                 valueOne: {
-                    value: 1
+                    value: { a: 1 }
                 },
                 valueTwo: {
                     value: false
@@ -54,13 +54,20 @@ describe('Container', () => {
             it('returns that value', () => {
                 let result = container.resolve('valueOne');
 
-                assert.strictEqual(result, 1);
+                assert.strictEqual(result.a, 1);
             });
 
             it('returns that value even if falsy', () => {
                 let result = container.resolve('valueTwo');
 
                 assert.strictEqual(result, false);
+            });
+
+            it('returns the same value every time', () => {
+                let result1 = container.resolve('valueOne');
+                let result2 = container.resolve('valueOne');
+
+                assert.strictEqual(result2, result1);
             });
         });
 
@@ -102,6 +109,13 @@ describe('Container', () => {
                 assert.strictEqual(result.valueOne, 42);
                 assert.strictEqual(result.serviceTwo.valueOne, 42);
             });
+
+            it('returns new (different) instance every time', () => {
+                let result1 = container.resolve('serviceOne');
+                let result2 = container.resolve('serviceOne');
+
+                assert.notStrictEqual(result2, result1);
+            });
         });
 
         describe('for registered factory', () => {
@@ -121,6 +135,46 @@ describe('Container', () => {
 
                 assert.ok(result instanceof ServiceClassTwo);
                 assert.strictEqual(result.valueOne, 42);
+            });
+        });
+
+        describe('for registered singleton', () => {
+            let container = new Container({
+                serviceOne: {
+                    class: ServiceClassOne
+                },
+                serviceTwo: {
+                    class: ServiceClassTwo
+                },
+                valueOne: {
+                    value: 42
+                },
+                singletonOne: {
+                    singleton: ServiceClassThree
+                }
+            });
+
+            it('resolves constructed instance', () => {
+                let result1 = container.resolve('singletonOne');
+
+                assert.ok(result1 instanceof ServiceClassThree);
+            });
+
+            it('resolves full dependency tree', () => {
+                let result = container.resolve('singletonOne');
+
+                assert.ok(result instanceof ServiceClassThree);
+                assert.ok(result.serviceOne instanceof ServiceClassOne);
+                assert.ok(result.serviceTwo instanceof ServiceClassTwo);
+                assert.strictEqual(result.valueOne, 42);
+                assert.strictEqual(result.serviceTwo.valueOne, 42);
+            });
+
+            it('returns the same instance every time', () => {
+                let result1 = container.resolve('singletonOne');
+                let result2 = container.resolve('singletonOne');
+
+                assert.strictEqual(result2, result1);
             });
         });
     });
