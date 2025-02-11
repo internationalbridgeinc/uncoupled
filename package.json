@@ -1,6 +1,6 @@
 {
     "name": "uncoupled",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "private": false,
     "description": "Minimalist, express-based web framework with dependency injection.",
     "main": "main.js",
@@ -25,9 +25,9 @@
     "license": "MIT",
     "repository": "harrywhitehouse/uncoupled",
     "devDependencies": {
-        "mocha": "^5.2.0"
+        "mocha": "^11.1.0"
     },
     "dependencies": {
-        "express": "^4.16.4"
+        "express": "^4.21.2"
     }
 }
